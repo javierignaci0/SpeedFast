@@ -3,12 +3,12 @@ package model;
 public class Repartidor {
 
     private String nombreRepartidor;
-    private int distancia;
+    private int proximidad;
     private boolean mochilaTermica;
 
-    public Repartidor(String nombreRepartidor, int distancia,  boolean mochilaTermica){
+    public Repartidor(String nombreRepartidor, int proximidad,  boolean mochilaTermica){
         this.nombreRepartidor = nombreRepartidor;
-        this.distancia = distancia;
+        this.proximidad = proximidad;
         this.mochilaTermica = mochilaTermica;
 
     }
@@ -21,12 +21,11 @@ public class Repartidor {
         this.nombreRepartidor = nombreRepartidor;
     }
 
-    public int getDistancia() {
-        return distancia;
+    public int getProximidad() {
+        return proximidad;
     }
-
-    public void setDistancia(int distancia) {
-        this.distancia = distancia;
+    public void setProximidad(int proximidad) {
+        this.proximidad = proximidad;
     }
 
     public boolean isMochilaTermica() {
@@ -39,7 +38,7 @@ public class Repartidor {
 
     public String verificarMochila(){
         if (!isMochilaTermica()){
-            return "No tiene Mochila";
+            return "No tiene Mochila Termica";
         }
         else {
             return "OK";
@@ -48,7 +47,7 @@ public class Repartidor {
 
     @Override
     public String toString(){
-        return "Repartidor: " + nombreRepartidor + ", Distancia: " + distancia + ", Mochila Termica: " + mochilaTermica;
+        return "Repartidor: " + getNombreRepartidor() + ", Proximidad: " + getProximidad() + ", Mochila Termica: " + verificarMochila();
     }
 }
 

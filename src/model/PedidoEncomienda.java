@@ -6,8 +6,8 @@ public class PedidoEncomienda extends Pedido{
     private int peso;
 
 
-    public PedidoEncomienda(String idPedido, String direccionEntrega, String tipoPedido, String medidas, int peso){
-        super(idPedido, direccionEntrega, tipoPedido);
+    public PedidoEncomienda(String idPedido, String direccionEntrega, int distancia, String medidas, int peso){
+        super(idPedido, direccionEntrega, distancia);
         this.medidas = medidas;
         this.peso = peso;
     }
@@ -27,6 +27,14 @@ public class PedidoEncomienda extends Pedido{
     public void setPeso(int peso) {
         this.peso = peso;
     }
+
+    @Override
+    public void calcularTiempoEntrega() {
+
+        double tiempoEntrega = 20 + (1.5 * (getDistancia()));
+        System.out.println("Tiempo de entrega aproximado: " + Math.round(tiempoEntrega)+ " min.");
+    }
+
     @Override
     public String asignarRepartidor(Repartidor repartidor) {
         return "Tipo pedido: Encomienda" +

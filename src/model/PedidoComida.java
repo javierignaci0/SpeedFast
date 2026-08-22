@@ -7,8 +7,8 @@ public class PedidoComida extends Pedido{
     protected Repartidor repartidor;
 
 
-    public PedidoComida(String idPedido, String direccionEntrega, String tipoPedido, String restaurante){
-        super(idPedido, direccionEntrega, tipoPedido);
+    public PedidoComida(String idPedido, String direccionEntrega, int distancia, String restaurante){
+        super(idPedido, direccionEntrega, distancia);
         this.restaurante = restaurante;
     }
 
@@ -18,6 +18,14 @@ public class PedidoComida extends Pedido{
 
     public void setRestaurante(String restaurante) {
         this.restaurante = restaurante;
+    }
+
+
+    @Override
+    public void calcularTiempoEntrega(){
+
+        double tiempoEntrega = 15 + (2 * (getDistancia()));
+        System.out.println("Tiempo de entrega aproximado: " + tiempoEntrega + " min.");
     }
 
 
