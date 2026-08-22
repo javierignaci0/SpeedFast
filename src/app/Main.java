@@ -27,9 +27,5 @@ public class Main {
         System.out.println(pedido3.mostrarResumen());
         pedido3.calcularTiempoEntrega();
 
-
-        System.out.println(repartidor1.verificarMochila());
-        System.out.println(repartidor2.verificarMochila());
-        System.out.println(repartidor3.verificarMochila());
     }
 }
