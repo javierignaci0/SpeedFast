@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class ZonaDeCarga {
@@ -16,5 +18,9 @@ public class ZonaDeCarga {
     public synchronized int cantidadPedidos(){
         return listaPedidos.size();
     }
+
+    public List<Pedido> historialPedidos = new ArrayList<>();
+
+
 
 }
