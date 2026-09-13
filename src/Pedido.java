@@ -1,15 +1,13 @@
 public class Pedido {
-    private int id;
-    private String direccion;
+    private final int id;
+    private final String direccion;
     private estadoPedido estado;
 
-    public Pedido(int id, String direccion, estadoPedido estado) {
+    public Pedido(int id, String direccion) {
         this.id = id;
         this.direccion = direccion;
         this.estado = estadoPedido.PENDIENTE;
     }
-
-    public Pedido(){}
 
     public int getId() {
         return id;
@@ -29,6 +27,6 @@ public class Pedido {
 
     @Override
     public String toString() {
-        return "Pedido #" + id + " | Direccion: " + direccion + " | Estado: " + estado;
+        return "Pedido #" + getId() + " | Direccion: " + getDireccion() + " | Estado: " + getEstado();
     }
 }
