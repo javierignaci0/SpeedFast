@@ -15,6 +15,7 @@ public class Repartidor implements Runnable {
         while (true){
 
             Pedido pedido = zonaCarga.retirarPedido();
+
             if (pedido == null){
                 System.out.println("No quedan pedidos por tomar.");
                 return;
@@ -23,6 +24,7 @@ public class Repartidor implements Runnable {
             pedido.setEstado(estadoPedido.EN_REPARTO);
             System.out.println("[Repartidor: " + nombre + "] inicia el reparto del pedido #" + pedido.getId() +
                     " | Estado: "+ pedido.getEstado());
+            zonaCarga.historialPedidos.add(pedido);
             try{
                 int tiempo = random.nextInt(2000,6000);
                 Thread.sleep(tiempo);
