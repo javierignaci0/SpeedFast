@@ -1,5 +1,8 @@
+package app;
+
+import view.VentanaPrincipal;
+
 import javax.swing.*;
-import java.awt.*;
 
 public class Main {
     public static void main(String[] args) {

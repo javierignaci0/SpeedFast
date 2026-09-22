@@ -1,7 +1,11 @@
+package view;
+
+import model.ControladorPedidos;
+import model.EstadoPedido;
+import model.Pedido;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class VentanaPrincipal extends JFrame {
     private JButton registrarPedidoButton;
@@ -51,12 +55,19 @@ public class VentanaPrincipal extends JFrame {
                 JOptionPane.showMessageDialog(this,"El pedido #" + id + " no existe");
                 return;
             }
-            if (pedidoEncontrado != null){
-                pedidoEncontrado.setEstado(EstadoPedido.EN_REPARTO);
-                JOptionPane.showMessageDialog(this, "El estado del pedido #" + id + " se ha actualizado.");
 
+            if (pedidoEncontrado.getEstado() == EstadoPedido.ENTREGADO){
+                JOptionPane.showMessageDialog(this, "El pedido #" + id + " ya fue entregado.");
+                return;
             }
 
+            if (pedidoEncontrado.getEstado() == EstadoPedido.EN_REPARTO){
+                JOptionPane.showMessageDialog(this,"El pedido #" + id + " ya se encuentra en reparto");
+                return;
+            }
+
+            pedidoEncontrado.setEstado(EstadoPedido.EN_REPARTO);
+            JOptionPane.showMessageDialog(this, "El pedido #" + id + " ha iniciado su despacho.");
             Pedido pedidoParaEntregar = pedidoEncontrado;
 
             javax.swing.Timer timer = new javax.swing.Timer(10000, e -> {
@@ -67,12 +78,9 @@ public class VentanaPrincipal extends JFrame {
             timer.setRepeats(false);
             timer.start();
 
-
         }catch (NumberFormatException e){
             JOptionPane.showMessageDialog(this,"Ingrese un numero valido");
         }
-
-
     }
 }
 

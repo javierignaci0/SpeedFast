@@ -1,3 +1,8 @@
+package view;
+
+import model.ControladorPedidos;
+import model.Pedido;
+
 import javax.swing.*;
 
 public class VentanaRegistroPedidos extends JFrame {
