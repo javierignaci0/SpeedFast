@@ -1,0 +1,13 @@
+package dao;
+
+import model.Pedido;
+
+import java.util.List;
+
+public interface PedidoDAO {
+
+    boolean guardar(Pedido pedido);
+    List<Pedido> listarTodos();
+    boolean editar(Pedido pedido);
+    boolean eliminar(Pedido pedido);
+}
