@@ -13,12 +13,6 @@ public class PedidoDAOImpl implements PedidoDAO {
 
     // metodo que INSERTA
     public boolean guardar(Pedido pedido) {
-
-        if (pedido == null || pedido.getDireccion() == null || pedido.getTipo() == null || pedido.getEstado() == null) {
-            System.out.println("No se permite ningun valor nulo en Pedido");
-            return false;
-        }
-
         String sql =
                 "INSERT INTO pedidos (direccion, tipo, estado) VALUES (?, ?, ?)";
 

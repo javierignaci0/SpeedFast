@@ -8,8 +8,8 @@ public interface EntregaDAO {
 
     boolean guardar(Entrega entrega);
     List<Entrega> listarTodos();
-    boolean editar(Entrega entrega);
-    boolean eliminar(Entrega entrega);
+    boolean actualizar(Entrega entrega);
+    boolean eliminar(int id);
 
 
 

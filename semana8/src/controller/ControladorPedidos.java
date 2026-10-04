@@ -28,4 +28,32 @@ public class ControladorPedidos {
     public List<Pedido> listarPedidos() {
         return pedidoDAO.listarTodos();
     }
+
+    public boolean actualizarPedido(Pedido pedido) {
+        if (pedido == null || pedido.getDireccion() == null || pedido.getTipo() == null || pedido.getEstado() == null) {
+            System.out.println("No se permite ningun valor nulo en Pedido");
+            return false;
+        }
+        boolean exito = pedidoDAO.editar(pedido);
+        if (exito) {
+            System.out.println("Pedido actualizado con exito.");
+        }else{
+            System.out.println("Error al actualizar pedido.");
+        }
+        return exito;
+    }
+
+    public boolean eliminarPedido(Pedido pedido) {
+        if (pedido == null || pedido.getDireccion() == null || pedido.getTipo() == null || pedido.getEstado() == null) {
+            System.out.println("No se permite ningun valor nulo en Pedido");
+            return false;
+        }
+        boolean exito = pedidoDAO.eliminar(pedido);
+        if (exito) {
+            System.out.println("Pedido eliminado con exito.");
+        }else {
+            System.out.println("Error al eliminar pedido.");
+        }
+        return exito;
+    }
 }

@@ -15,11 +15,6 @@ public class RepartidorDAOImpl implements RepartidorDAO {
 
     public boolean guardar(Repartidor repartidor) {
 
-        if(repartidor == null || repartidor.getNombre() == null){
-            System.out.println("No se permite ningun valor nulo en Repartidor");
-            return false;
-        }
-
         String sql = "INSERT INTO repartidores (nombre) VALUES (?)";
 
         try (Connection conexion = ConexionDB.conectar();

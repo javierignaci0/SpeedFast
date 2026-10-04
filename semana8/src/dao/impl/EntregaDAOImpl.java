@@ -4,6 +4,7 @@ package dao.impl;
 import dao.EntregaDAO;
 import model.Entrega;
 import util.ConexionDB;
+import java.sql.Connection;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -15,10 +16,7 @@ public class EntregaDAOImpl implements EntregaDAO {
     // metodo que INSERTA
     public boolean guardar(Entrega entrega){
 
-        if(entrega == null || entrega.getFecha() == null || entrega.getHora() == null){
-            System.out.println("No se permite ningun valor nulo en Entrega");
-            return false;
-        }
+
 
         String sql =
                 "INSERT INTO entregas (id_pedido, id_repartidor, fecha, hora) VALUES (?,?,?,?)";
@@ -41,6 +39,7 @@ public class EntregaDAOImpl implements EntregaDAO {
     }
 
     // metodo que RECUPERA
+    @Override
     public List<Entrega> listarTodos() {
 
         List<Entrega> entregas = new ArrayList<>();
@@ -72,12 +71,41 @@ public class EntregaDAOImpl implements EntregaDAO {
     }
 
     @Override
-    public boolean editar(Entrega entrega) {
-        return false;
+    public boolean actualizar(Entrega entrega) {
+
+        String sql = "UPDATE INTO entregas(id_pedido, id_repartidor, fecha, hora) VALUES (?,?,?,?) where id=?";
+
+        try (Connection conexion = ConexionDB.conectar();
+             PreparedStatement ps = conexion.prepareStatement(sql)){
+
+            ps.setInt(1, entrega.getId_pedido());
+            ps.setInt(2, entrega.getId_repartidor());
+            ps.setDate(3, Date.valueOf(entrega.getFecha()));
+            ps.setTime(4, Time.valueOf(entrega.getHora()));
+
+            return ps.executeUpdate() > 0;
+
+        }catch(SQLException e){
+            System.out.println("Error al actualizar en entrega: " + e.getMessage());
+            return false;
+            }
+
     }
 
     @Override
-    public boolean eliminar(Entrega entrega) {
-        return false;
+    public boolean eliminar(int id) {
+
+        String sql = "DELETE FROM entregas where id=?";
+
+        try (Connection conexion = ConexionDB.conectar();
+            PreparedStatement ps = conexion.prepareStatement(sql)){
+
+            return ps.executeUpdate() > 0;
+        }
+        catch (SQLException e){
+            System.out.println("Error al eliminar en entrega: " + e.getMessage());
+            return false;
+        }
+
     }
 }
