@@ -61,6 +61,7 @@ public class VentanaAlternativaForm extends JFrame {
     private String direccionInicial;
     private String tipoInicial;
 
+
     public VentanaAlternativaForm() {
         // CONFIGURACION VENTANA
         setTitle("SpeedFast v8");
@@ -227,7 +228,6 @@ public class VentanaAlternativaForm extends JFrame {
             if (exito){
                 // se usa el ps.getGeneratedKeys para obtener id
                 JOptionPane.showMessageDialog(null, "Pedido #" + pedidoNuevo.getId() + " creado con exito.", "Sistema registro", JOptionPane.INFORMATION_MESSAGE);
-                System.out.println("Pedido #" + pedidoNuevo.getId() + " agregado correctamente a la base de datos.");
 
                 actualizarComboIdPedido(comboIdPedido);
             }
@@ -257,6 +257,7 @@ public class VentanaAlternativaForm extends JFrame {
 
     //FUNCIONA UPDATE PEDIDO
     public void editarPedido() {
+        //validacion id
         if (idPedidoSeleccionado == -1) {
             JOptionPane.showMessageDialog(this, "Por favor, seleccione un pedido de la tabla para editar.");
             return;
@@ -265,6 +266,7 @@ public class VentanaAlternativaForm extends JFrame {
         String nuevaDireccion = campoDireccion.getText();
         String nuevoTipo = Objects.requireNonNull(comboTipo.getSelectedItem()).toString();
 
+        //validacion
         if (nuevaDireccion.equals(direccionInicial) && nuevoTipo.equals(tipoInicial)) {
             JOptionPane.showMessageDialog(null, "No se ha modificado ningun campo");
             return;
@@ -276,12 +278,11 @@ public class VentanaAlternativaForm extends JFrame {
         }
 
         Pedido pedidoModificado = new Pedido(idPedidoSeleccionado, nuevaDireccion, nuevoTipo);
-
+        //
         boolean exito = controladorPedidos.actualizarPedido(pedidoModificado);
 
         if (exito) {
             JOptionPane.showMessageDialog(null, "Pedido actualizado correctamente.");
-            System.out.println("UI: Pedido actualizado correctamente.");
 
             idPedidoSeleccionado = -1;
             limpiarCampos();
@@ -313,7 +314,6 @@ public class VentanaAlternativaForm extends JFrame {
         boolean exito = controladorPedidos.eliminarPedido(idPedidoSeleccionado);
         if (exito) {
             JOptionPane.showMessageDialog(null,"Pedido #" + idPedidoSeleccionado + " eliminado correctamente.");
-            System.out.println("Pedido #" + idPedidoSeleccionado + " eliminado correctamente.");
 
             idPedidoSeleccionado = -1;
             actualizarTablaP();
@@ -338,7 +338,6 @@ public class VentanaAlternativaForm extends JFrame {
             // V -> C
             controladorRepartidores.agregarRepartidor(repartidor);
             JOptionPane.showMessageDialog(null, "Repartidor creado con exito.");
-            System.out.println("Repartidor creado con exito.");
             actualizarTablaR();
             limpiarCampos();
 
@@ -411,7 +410,6 @@ public class VentanaAlternativaForm extends JFrame {
 
             if (exito){
                 JOptionPane.showMessageDialog(null, "Repartidor #" + idRepartidorSeleccionado + " eliminado correctamente.");
-                System.out.println("Repartidor eliminado correctamente.");
 
                 idRepartidorSeleccionado = -1;
                 actualizarTablaR();
@@ -461,7 +459,6 @@ public class VentanaAlternativaForm extends JFrame {
 
             if (exito) {
                 JOptionPane.showMessageDialog(null, "Entrega creada correctamente");
-                System.out.println("Entrega creada correctamente.");
 
                 controladorPedidos.cambiarEstadoPedido(idPedido);
 
@@ -472,7 +469,7 @@ public class VentanaAlternativaForm extends JFrame {
                 JOptionPane.showMessageDialog(null, "Error al crear la entrega");
             }
         } catch (Exception ex) {
-            System.out.println("Error inesperado: " + ex.getMessage());
+            JOptionPane.showMessageDialog(this,"Error inesperado: " + ex.getMessage());
         }
     }
 
@@ -544,7 +541,6 @@ public class VentanaAlternativaForm extends JFrame {
             boolean exito = controladorEntregas.eliminarEntrega(idEntregaSeleccionada);
             if (exito) {
                 JOptionPane.showMessageDialog(null, "Entrega eliminada correctamente");
-                System.out.println("Entrega eliminada correctamente");
 
                 idEntregaSeleccionada = -1;
                 actualizarTablaE();

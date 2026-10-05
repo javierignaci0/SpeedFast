@@ -13,6 +13,12 @@ import java.util.List;
 
 public class RepartidorDAOImpl implements RepartidorDAO {
 
+    /**
+     *
+     * @param repartidor recibe la instancia de Repartidor desde el ControladorRepartidor
+     * @return booleano de filas afectadas > 0, que confirman o no que el Repartidor fue creado exitosamente en la base de
+     * datos con sentencia SQL tipo INSERT.
+     */
     public boolean guardar(Repartidor repartidor) {
 
         String sql = "INSERT INTO repartidores (nombre) VALUES (?)";
@@ -30,9 +36,11 @@ public class RepartidorDAOImpl implements RepartidorDAO {
         }
     }
 
-
-
-    // metodo que RECUPERA
+    /**
+     *
+     * @return una lista de objetos Repartidor, a traves de una sentencia SQL tipo SELECT de lectura de filas construye el objeto
+     * con cada atributo recuperado.
+     */
     public List<Repartidor> listarTodos() {
 
         List<Repartidor> repartidores = new ArrayList<>();
@@ -60,6 +68,11 @@ public class RepartidorDAOImpl implements RepartidorDAO {
         return repartidores;
     }
 
+    /**
+     *
+     * @param repartidor enviado desde ControladorRepartidor para ser modificado por una sentencia SQL tipo UPDATE
+     * @return boolean de filas afectadas > 0, confirmando o no que los parametros fueron reemplazados.
+     */
     public boolean editar(Repartidor repartidor) {
         String sql = "UPDATE repartidores SET nombre=? WHERE id=?";
 
@@ -77,6 +90,11 @@ public class RepartidorDAOImpl implements RepartidorDAO {
         }
     }
 
+    /**
+     *
+     * @param id de Repartidor enviado desde ControladorRepartidor para ser eliminado con sentencia SQL tipo DELETE
+     * @return booleano de filas afectadas > 0, confirmando o no que la operacion se realizo.
+     */
     public boolean eliminar(int id) {
         String sql = "DELETE FROM repartidores WHERE id=?";
 

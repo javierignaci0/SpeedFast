@@ -11,7 +11,12 @@ import java.util.List;
 
 public class PedidoDAOImpl implements PedidoDAO {
 
-    // metodo que INSERTA
+    /**
+     *
+     * @param pedido recibe la instancia de pedido desde el ControladorPedidos
+     * @return booleano de filas afectadas > 0, que confirman o no que el pedido fue creado exitosamente en la base de
+     * datos con sentencia SQL tipo INSERT.
+     */
     public boolean guardar(Pedido pedido) {
         String sql =
                 "INSERT INTO pedidos (direccion, tipo, estado) VALUES (?, ?, ?)";
@@ -41,7 +46,11 @@ public class PedidoDAOImpl implements PedidoDAO {
         }
     }
 
-    // metodo que RECUPERA
+    /**
+     *
+     * @return una lista de objetos Pedido, a traves de una sentencia SQL tipo SELECT de lectura de filas construye el objeto
+     * con cada atributo recuperado.
+     */
     public List<Pedido> listarTodos() {
 
         List<Pedido> pedidos = new ArrayList<>();
@@ -74,7 +83,11 @@ public class PedidoDAOImpl implements PedidoDAO {
         return pedidos;
     }
 
-    //metodo que actualiza
+    /**
+     *
+     * @param pedido enviado desde ControladorPedidos para ser modificado por una sentencia SQL tipo UPDATE
+     * @return boolean de filas afectadas > 0, confirmando o no que los parametros fueron reemplazados.
+     */
     @Override
     public boolean actualizar(Pedido pedido){
         String sql = "UPDATE pedidos SET direccion=?, tipo=?, estado=? WHERE id=?";
@@ -95,7 +108,11 @@ public class PedidoDAOImpl implements PedidoDAO {
         }
     }
 
-    //metodo que elimina
+    /**
+     *
+     * @param id de Pedido enviado desde ControladorEntregas para ser eliminado con sentencia SQL tipo DELETE
+     * @return booleano de filas afectadas > 0, confirmando o no que la operacion se realizo.
+     */
     public boolean eliminar(int id){
         String sql = "DELETE FROM pedidos WHERE id=?";
 

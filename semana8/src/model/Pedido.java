@@ -7,6 +7,13 @@ public class Pedido {
     private String tipo;
     private EstadoPedido estado;
 
+    /**
+     *
+     * @param id es el id del pedido
+     * @param direccion es la direccion de pedido
+     * @param tipo es el tipo de pedido (COMIDA, ENCOMIENDA, EXPRESS)
+     * @param estado es el estado del pedido (PENDIENTE, EN_REPARTO, ENTREGADO)
+     */
     public Pedido(int id, String direccion, String tipo, EstadoPedido estado) {
         this.id = id;
         this.direccion = direccion;

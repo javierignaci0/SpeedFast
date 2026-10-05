@@ -13,7 +13,12 @@ import java.util.List;
 
 public class EntregaDAOImpl implements EntregaDAO {
 
-    // metodo que INSERTA
+    /**
+     *
+     * @param entrega recibe la instancia de Entrega desde el ControladorEntregas
+     * @return un boolean de filas afectas si son mayores a 0, que insertan una sentencia
+     * SQL tipo INSERT en la base de datos, creando un objeto en la tabla 'entregas'.
+     */
     @Override
     public boolean guardar(Entrega entrega){
         String sql =
@@ -36,7 +41,11 @@ public class EntregaDAOImpl implements EntregaDAO {
         }
     }
 
-    // metodo que RECUPERA
+    /**
+     *
+     * @return una lista de objetos Entrega, a traves de una sentencia SQL tipo SELECT de lectura de filas construye el objeto
+     * con cada atributo recuperado.
+     */
     @Override
     public List<Entrega> listarTodos() {
 
@@ -68,6 +77,11 @@ public class EntregaDAOImpl implements EntregaDAO {
         return entregas;
     }
 
+    /**
+     *
+     * @param entrega enviado desde ControladorEntregas para ser modificado por una sentencia SQL tipo UPDATE
+     * @return boolean de filas afectadas > 0, confirmando o no que los parametros fueron reemplazados.
+     */
     @Override
     public boolean actualizar(Entrega entrega) {
 
@@ -88,6 +102,11 @@ public class EntregaDAOImpl implements EntregaDAO {
             }
     }
 
+    /**
+     *
+     * @param id de Entrega enviado desde ControladorEntregas para ser eliminado con sentencia SQL tipo DELETE
+     * @return booleano de filas afectadas > 0, confirmando o no que la operacion se realizo.
+     */
     @Override
     public boolean eliminar(int id) {
 
