@@ -8,6 +8,6 @@ public interface PedidoDAO {
 
     boolean guardar(Pedido pedido);
     List<Pedido> listarTodos();
-    boolean editar(Pedido pedido);
-    boolean eliminar(Pedido pedido);
+    boolean actualizar(Pedido pedido);
+    boolean eliminar(int id);
 }

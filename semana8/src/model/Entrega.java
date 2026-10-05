@@ -28,6 +28,12 @@ public class Entrega {
         this.hora = hora;
     }
 
+    public Entrega(int id, int id_pedido, int id_repartidor) {
+        this.id = id;
+        this.id_pedido = id_pedido;
+        this.id_repartidor = id_repartidor;
+    }
+
     public int getId() {
         return id;
     }

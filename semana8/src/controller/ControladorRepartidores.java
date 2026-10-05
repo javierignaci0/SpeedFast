@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ControladorRepartidores {
 
-    private RepartidorDAOImpl repartidorDAO;
+    private final RepartidorDAOImpl repartidorDAO;
 
     public ControladorRepartidores() {
         this.repartidorDAO = new RepartidorDAOImpl();
@@ -39,7 +39,7 @@ public class ControladorRepartidores {
             return false;
         }
 
-        boolean exito = actualizarRepartidor(repartidor);
+        boolean exito = repartidorDAO.editar(repartidor);
 
         if(exito){
             System.out.println("Repartidor se actualizo correctamente.");
@@ -49,11 +49,10 @@ public class ControladorRepartidores {
         return exito;
     }
 
-    public boolean eliminarRepartidor(Repartidor repartidor){
-        if(repartidor == null || repartidor.getNombre() == null){
-            System.out.println("No se permite ningun valor nulo en Repartidor");
-        }
-        boolean exito = eliminarRepartidor(repartidor);
+    public boolean eliminarRepartidor(int id){
+
+        boolean exito = repartidorDAO.eliminar(id);
+
         if(exito){
             System.out.println("Repartidor se eliminado correctamente.");
         }else{

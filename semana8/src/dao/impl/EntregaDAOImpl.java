@@ -14,10 +14,8 @@ import java.util.List;
 public class EntregaDAOImpl implements EntregaDAO {
 
     // metodo que INSERTA
+    @Override
     public boolean guardar(Entrega entrega){
-
-
-
         String sql =
                 "INSERT INTO entregas (id_pedido, id_repartidor, fecha, hora) VALUES (?,?,?,?)";
 
@@ -73,15 +71,14 @@ public class EntregaDAOImpl implements EntregaDAO {
     @Override
     public boolean actualizar(Entrega entrega) {
 
-        String sql = "UPDATE INTO entregas(id_pedido, id_repartidor, fecha, hora) VALUES (?,?,?,?) where id=?";
+        String sql = "UPDATE entregas SET id_pedido=?, id_repartidor=? where id=?";
 
         try (Connection conexion = ConexionDB.conectar();
              PreparedStatement ps = conexion.prepareStatement(sql)){
 
             ps.setInt(1, entrega.getId_pedido());
             ps.setInt(2, entrega.getId_repartidor());
-            ps.setDate(3, Date.valueOf(entrega.getFecha()));
-            ps.setTime(4, Time.valueOf(entrega.getHora()));
+            ps.setInt(3, entrega.getId());
 
             return ps.executeUpdate() > 0;
 
@@ -89,7 +86,6 @@ public class EntregaDAOImpl implements EntregaDAO {
             System.out.println("Error al actualizar en entrega: " + e.getMessage());
             return false;
             }
-
     }
 
     @Override
@@ -99,6 +95,8 @@ public class EntregaDAOImpl implements EntregaDAO {
 
         try (Connection conexion = ConexionDB.conectar();
             PreparedStatement ps = conexion.prepareStatement(sql)){
+
+            ps.setInt(1, id);
 
             return ps.executeUpdate() > 0;
         }

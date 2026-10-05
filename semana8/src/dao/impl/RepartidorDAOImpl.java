@@ -61,12 +61,36 @@ public class RepartidorDAOImpl implements RepartidorDAO {
     }
 
     public boolean editar(Repartidor repartidor) {
-        return false;
+        String sql = "UPDATE repartidores SET nombre=? WHERE id=?";
+
+        try (Connection conexion = ConexionDB.conectar();
+             PreparedStatement ps = conexion.prepareStatement(sql)){
+
+            ps.setString(1, repartidor.getNombre());
+            ps.setInt(2, repartidor.getId());
+
+            return ps.executeUpdate() > 0;
+
+        }catch (SQLException e){
+            System.out.println("Error al actualizar repartidor: " + e.getMessage());
+            return false;
+        }
     }
 
+    public boolean eliminar(int id) {
+        String sql = "DELETE FROM repartidores WHERE id=?";
 
-    public boolean eliminar(Repartidor repartidor) {
-        return false;
+        try (Connection con = ConexionDB.conectar();
+             PreparedStatement ps = con.prepareStatement(sql)){
+
+            ps.setInt(1, id);
+
+            return ps.executeUpdate() > 0;
+
+        }catch (SQLException e) {
+            System.out.println("Error al eliminar repartidor: " + e.getMessage());
+            return false;
+        }
     }
 
-} // listo
+}

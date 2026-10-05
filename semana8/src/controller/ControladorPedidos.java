@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ControladorPedidos {
 
-    private PedidoDAOImpl pedidoDAO;
+    private final PedidoDAOImpl pedidoDAO;
 
     public ControladorPedidos() {
         this.pedidoDAO = new PedidoDAOImpl();
@@ -18,7 +18,7 @@ public class ControladorPedidos {
         boolean exito = pedidoDAO.guardar(pedido);
 
         if (exito) {
-            System.out.println("Pedido agregado con exito.");
+            System.out.println("CP: Pedido creado con exito.");
         }else{
             System.out.println("Error al agregar pedido.");
         }
@@ -34,7 +34,8 @@ public class ControladorPedidos {
             System.out.println("No se permite ningun valor nulo en Pedido");
             return false;
         }
-        boolean exito = pedidoDAO.editar(pedido);
+
+        boolean exito = pedidoDAO.actualizar(pedido);
         if (exito) {
             System.out.println("Pedido actualizado con exito.");
         }else{
@@ -43,17 +44,22 @@ public class ControladorPedidos {
         return exito;
     }
 
-    public boolean eliminarPedido(Pedido pedido) {
-        if (pedido == null || pedido.getDireccion() == null || pedido.getTipo() == null || pedido.getEstado() == null) {
-            System.out.println("No se permite ningun valor nulo en Pedido");
-            return false;
-        }
-        boolean exito = pedidoDAO.eliminar(pedido);
+    public boolean eliminarPedido(int id) {
+
+        boolean exito = pedidoDAO.eliminar(id);
         if (exito) {
             System.out.println("Pedido eliminado con exito.");
         }else {
             System.out.println("Error al eliminar pedido.");
         }
         return exito;
+    }
+
+    public boolean cambiarEstadoPedido(int idPedido) {
+        return pedidoDAO.cambiarEstado(idPedido, "ENTREGADO");
+    }
+
+    public boolean verificarPedidoEntregado(int idPedido) {
+        return pedidoDAO.pedidoYaEntregado(idPedido);
     }
 }
